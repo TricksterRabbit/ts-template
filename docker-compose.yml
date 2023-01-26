@@ -3,7 +3,7 @@ version: "3.9"
 services:
   app:
     image: node:18.12-alpine
-    command: sh -c "npm i && npm run dev"
+    command: sh -c "npm i && npm run sync:tables && npm run dev"
     ports:
       - 3000:3000
     working_dir: /app

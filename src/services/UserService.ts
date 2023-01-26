@@ -1,21 +1,19 @@
 import { PrismaClient, User } from "@prisma/client";
+import IUserService from "./interfaces/IUserService";
 
 const prisma = new PrismaClient();
 
-class UserServices {
+class UserService implements IUserService {
   async getUsers(): Promise<User[]> {
-    const users = await prisma.user.findMany();
-    return users;
+    return await prisma.user.findMany();
   }
 
   async getUser(id: number): Promise<User | null> {
-    const user = await prisma.user.findUnique({ where: { id } });
-    return user;
+    return await prisma.user.findUnique({ where: { id } });
   }
 
   async getUserByEmail(email: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({ where: { email } });
-    return user;
+    return await prisma.user.findUnique({ where: { email } });
   }
 
   async createUser(
@@ -23,8 +21,7 @@ class UserServices {
     password: string,
     name: string
   ): Promise<User> {
-    const user = await prisma.user.create({ data: { email, password, name } });
-    return user;
+    return await prisma.user.create({ data: { email, password, name } });
   }
 
   async updateUser(
@@ -33,17 +30,15 @@ class UserServices {
     password: string,
     name: string
   ): Promise<User> {
-    const user = await prisma.user.update({
+    return await prisma.user.update({
       where: { id },
       data: { email, password, name },
     });
-    return user;
   }
 
   async deleteUser(id: number): Promise<User | null> {
-    const user = await prisma.user.delete({ where: { id } });
-    return user;
+    return await prisma.user.delete({ where: { id } });
   }
 }
 
-export default UserServices;
+export default UserService;
