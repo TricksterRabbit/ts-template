@@ -1,9 +1,11 @@
 import { Router } from "express";
 
-import helloController from "./controllers/hellocontroller";
+import HelloController from "./controllers/HelloController";
+
+const helloController = new HelloController();
 
 const routes = Router();
 
-routes.get("/", helloController.index);
+routes.get("/hello", (req, res) => helloController.index(req, res));
 
 export default routes;

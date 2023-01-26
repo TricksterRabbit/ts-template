@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 
-class HelloController {
+import IHelloController from "./interfaces/IHelloController";
+
+class HelloController implements IHelloController {
   index(req: Request, res: Response) {
     return res.json({
       message: "hello",
@@ -8,6 +10,4 @@ class HelloController {
   }
 }
 
-const helloController = new HelloController();
-
-export default helloController;
+export default HelloController;
