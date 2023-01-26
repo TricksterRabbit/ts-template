@@ -1,11 +1,12 @@
 import { Router } from "express";
 
-import HelloController from "./controllers/HelloController";
+import UserController from "./controllers/UserController";
 
-const helloController = new HelloController();
+const userController = new UserController();
 
 const routes = Router();
 
-routes.get("/hello", (req, res) => helloController.index(req, res));
+routes.get("/users", (req, res) => userController.getUsers(req, res));
+routes.get("/user/:id", (req, res) => userController.getUser(req, res));
 
 export default routes;
