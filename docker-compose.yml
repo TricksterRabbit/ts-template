@@ -6,6 +6,9 @@ services:
     command: sh -c "npm i && npm run sync:tables && npm run dev"
     ports:
       - 3000:3000
+    depends_on:
+      db:
+        condition: service_healthy
     working_dir: /app
     volumes:
       - ./:/app
@@ -18,3 +21,8 @@ services:
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
